@@ -1,0 +1,182 @@
+create database gestion_absences;
+
+create table professeurs
+(
+id_prof int NOT NULL AUTO_INCREMENT,
+cin_prof varchar(25),
+nom_prof varchar(25),
+prenom_prof varchar(25),
+email_prof varchar(55),
+pass_prof varchar(25),
+PRIMARY KEY (id_prof)
+);
+
+create table groupes
+(
+id_groupe int NOT NULL AUTO_INCREMENT,
+semestre_groupe varchar(10),
+annee_groupe varchar(10),
+PRIMARY KEY (id_groupe)
+);
+
+create table seances
+(
+id_seance int NOT NULL AUTO_INCREMENT,
+date_seance date,
+heure_seance varchar(25),
+id_groupe int,
+PRIMARY KEY (id_seance),
+FOREIGN KEY (id_groupe) REFERENCES groupes(id_groupe)
+);
+
+create table etudiants 
+(
+id_etd int NOT NULL AUTO_INCREMENT,
+num_etd int NOT NULL,
+nom_etd varchar(25),
+prenom_etd varchar(25),
+email_etd varchar(55),
+id_groupe int,
+pass_etd varchar(25),
+PRIMARY KEY (id_etd),
+FOREIGN KEY (id_groupe) REFERENCES groupes(id_groupe)
+);
+
+create table modules
+(
+id_mod int NOT NULL AUTO_INCREMENT,
+titre_mod varchar(55),
+semestre_mod varchar(25),
+annee_mod varchar(10),
+id_prof int NOT NULL,
+PRIMARY KEY (id_mod),
+FOREIGN KEY (id_prof) REFERENCES professeurs(id_prof)
+);
+
+create table evaluations
+(
+id_eval int NOT NULL AUTO_INCREMENT,
+date_eval date,
+heure_eval varchar(25),
+id_mod int NOT NULL,
+PRIMARY KEY (id_eval),
+FOREIGN KEY (id_mod) REFERENCES modules(id_mod)
+);
+
+
+create table etd_eval
+(
+id_etd int NOT NULL,
+id_eval int NOT NULL,
+note_etd float,
+FOREIGN KEY (id_etd) REFERENCES etudiants(id_etd),
+FOREIGN KEY (id_eval) REFERENCES evaluations(id_eval),
+PRIMARY KEY(id_etd, id_eval)
+);
+
+
+create table absences
+(
+id_etd int NOT NULL,
+id_seance int NOT NULL,
+present boolean,
+FOREIGN KEY (id_etd) REFERENCES etudiants(id_etd),
+FOREIGN KEY (id_seance) REFERENCES seances(id_seance),
+PRIMARY KEY(id_etd, id_seance)
+);
+
+create table changements
+(
+id_etd int NOT NULL,
+id_groupe_src int NOT NULL,
+date_ch date,
+FOREIGN KEY (id_etd) REFERENCES etudiants(id_etd),
+FOREIGN KEY (id_groupe_src) REFERENCES groupes(id_groupe),
+PRIMARY KEY(id_etd, id_groupe_src)
+);
+
+create table enseignements
+(
+id_prof int NOT NULL,
+id_mod int NOT NULL,
+FOREIGN KEY (id_prof) REFERENCES professeurs(id_prof),
+FOREIGN KEY (id_mod) REFERENCES modules(id_mod),
+PRIMARY KEY(id_prof, id_mod)
+);
+
+
+create table mod_group
+(
+id_groupe int NOT NULL,
+id_mod int NOT NULL,
+FOREIGN KEY (id_groupe) REFERENCES groupes(id_groupe),
+FOREIGN KEY (id_mod) REFERENCES modules(id_mod),
+PRIMARY KEY(id_groupe, id_mod)
+);
+
+
+create table prof_eval
+(
+id_prof int NOT NULL,
+id_eval int NOT NULL,
+FOREIGN KEY (id_prof) REFERENCES professeurs(id_prof),
+FOREIGN KEY (id_eval) REFERENCES evaluations(id_eval),
+PRIMARY KEY(id_prof, id_eval)
+);
+
+
+
+insert into groupes (semestre_groupe, annee_groupe)  values ('S3', '2018');
+insert into groupes (semestre_groupe, annee_groupe)  values ('S3', '2018');
+insert into groupes (semestre_groupe, annee_groupe)  values ('S3', '2018');
+
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1587, 'nom1', 'prenom1', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1588, 'nom2', 'prenom2', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1589, 'nom3', 'prenom3', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1590, 'nom4', 'prenom4', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1591, 'nom5', 'prenom5', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1592, 'nom6', 'prenom6', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1593, 'nom7', 'prenom7', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1564, 'nom8', 'prenom8', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1597, 'nom9', 'prenom9', 'email@gmail.com', 1,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1580, 'nom10', 'prenom10', 'email@gmail.com', 1,'test');
+
+
+
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1537, 'nom11', 'prenom11', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1538, 'nom12', 'prenom12', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1539, 'nom13', 'prenom13', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1530, 'nom14', 'prenom14', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1531, 'nom15', 'prenom15', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1532, 'nom16', 'prenom16', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1533, 'nom17', 'prenom17', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1434, 'nom18', 'prenom18', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1497, 'nom19', 'prenom19', 'email@gmail.com', 2,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1480, 'nom20', 'prenom20', 'email@gmail.com', 2,'test');
+
+
+
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1237, 'nom21', 'prenom21', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1238, 'nom22', 'prenom22', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1239, 'nom23', 'prenom23', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1230, 'nom24', 'prenom24', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1231, 'nom25', 'prenom25', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1232, 'nom26', 'prenom26', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1233, 'nom27', 'prenom27', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1234, 'nom28', 'prenom28', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1297, 'nom29', 'prenom29', 'email@gmail.com', 3,'test');
+insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (1280, 'nom30', 'prenom30', 'email@gmail.com', 3,'test');
+
+
+
+insert into professeurs (cin_prof, nom_prof, prenom_prof, email_prof, pass_prof) values ('wb175482','nomp', 'prenomp', 's0@gmail.com', 'test');
+
+insert into professeurs (cin_prof, nom_prof, prenom_prof, email_prof, pass_prof) values ('wb175582','nomp1', 'prenomp1', 's1@gmail.com', 'test');
+
+
+insert into professeurs (cin_prof, nom_prof, prenom_prof, email_prof, pass_prof) values ('wb175682','nomp2', 'prenomp2', 's2@gmail.com', 'test');
+
+
+
+
+
