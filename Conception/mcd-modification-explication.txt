@@ -1,0 +1,7 @@
+1 modification: professeur enseigne module
+------------------------------------------
+
+dans l'ex mcd on a associer à chaque groupe à un et un seul profs, donc si un groupe étudie plusieurs modules( ce qu'on doit
+effectivement faire) on peut pas savoir le module que ce prof enseigne.
+
+la solution donc c'est qu'on doit faire apparaitre une association entre le prof et le module qui permettra ainsi de savoir les modules que ce prof prend en charge.
