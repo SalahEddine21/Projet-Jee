@@ -49,6 +49,9 @@ public class ControleProf {
 		if( errors.isEmpty()){
 			try {
 				prof = Operations_Prof.findProfByCin(cin);
+				if( prof != null){
+					if(!prof.getPasse().equals(password)) errors.put("passe", "mot de passe incorrect !");
+				}
 			} catch (Exception e) {
 				errors.put("query", e.getMessage());
 			}

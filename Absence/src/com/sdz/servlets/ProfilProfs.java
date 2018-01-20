@@ -27,6 +27,7 @@ public class ProfilProfs extends HttpServlet {
 					 List<Integer> groupes = Operations_Prof.getGroupes(modules.get(0).getId());
 					 request.setAttribute("titre_module", modules.get(0).getTitre());
 					 request.setAttribute("groupes", groupes);
+					 //add the case if we have just one groupe -> display the sessions directly
 				}
 			}
 			request.setAttribute("modules", modules);

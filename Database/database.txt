@@ -179,11 +179,16 @@ insert into modules (titre_mod, semestre_mod, annee_mod, id_prof) values ('andro
 insert into modules (titre_mod, semestre_mod, annee_mod, id_prof) values ('c', 's1', '2017', 1);
 insert into modules (titre_mod, semestre_mod, annee_mod, id_prof) values ('c++', 's3', '2017', 2);
 
+update groupes set annee_groupe = '2017';
+update groupes set semestre_groupe = 'S1' where id_groupe = 3;
 
-
-
-
-
+insert into mod_group values (1,1);
+insert into mod_group values (1,2);
+insert into mod_group values (1,4);
+insert into mod_group values (2,1);
+insert into mod_group values (2,2);
+insert into mod_group values (2,4);
+insert into mod_group values (3,3);
 
 
 

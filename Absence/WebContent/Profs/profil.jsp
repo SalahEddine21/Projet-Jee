@@ -26,6 +26,7 @@
 		</header>
 
 		<div class="container">
+		
 	      <div class="row" style="margin-top:50px;">
 	      	 <div class="col-lg-12">
 	            <h1 class="page-header">Profil
@@ -38,38 +39,96 @@
 	            </ol>
 	          </div>
 	      </div>	
+	      
 	      <div class="row" >
 	      	<div class="col-lg-4">
 				<div class="list-group">
-					 <a href="#" class="list-group-item active"> Appel </a>
+					 <a href="profil" class="list-group-item active"> Appel </a>
 					 <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-					 <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-					 <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-					 <a href="#" class="list-group-item list-group-item-action ">Vestibulum at eros</a>
 				</div>
 	      	</div>
 	      	<div class="col-lg-6">
-	      		<div class="row">
-	      			<div class="col-lg-12">
-	      				<h4 style="margin-top:10px;" >Sélectionner un groupe</h4>
-	      			</div>
-	      		</div>
+	      	
+					<c:choose>
+					
+						<c:when test="${!empty requestScope.titre_module}" >
+							<div class="row">
+				      			<div class="col-lg-12">
+				      				<h4 style="margin-top:10px;" >Module: ${requestScope.titre_module}</h4>
+				      			</div>		
+				      		</div>	
+			      			<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label for="sel1">Selectionner un groupe</label>
+										<select class="form-control">
+											<c:forEach items="${requestScope.groupes}" var="groupes" >
+												<option value="${groupes}" > Groupe ${groupes} </option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+			      			</div>				
+						</c:when>
+						
+						<c:otherwise>
+							<div class="row">
+				      			<div class="col-lg-12">
+				      				<h4 style="margin-top:10px;" >Liste des Modules</h4>
+				      			</div>		
+				      		</div>	
+				      		<div class="row">
+				      			<div class="col-lg-12">
+									<div class="form-group">
+										<label for="sel1">Selectionner un Module</label>
+										<select class="form-control" id="modules">
+											<c:forEach items="${requestScope.modules}" var="modules" >
+												<option value="${modules.id}" >${modules.titre}</option>
+											</c:forEach>
+										</select>
+									</div>			      				
+				      			</div>
+				      		</div>	
+				      		<div class="row">
+								<div class="col-lg-12">
+									<button id="disp_groupe" class="btn btn-deep-purple" >Afficher Groupes</button>
+									<p>${requestScope.query1}</p>
+								</div>	
+				      		</div>
+				      		<div class="row">
+								<div class="col-lg-12" id="groupes"></div>
+				      		</div>				
+						</c:otherwise>
+						
+					</c:choose>
 	      		
-      			<div class="row">
-					<div class="col-lg-12">
-						<div class="form-group">
-						  <label for="sel1">Select list:</label>
-						  <select class="form-control" id="sel1">
-						    <option>1</option>
-						    <option>2</option>
-						    <option>3</option>
-						    <option>4</option>
-						  </select>
-						</div>
-					</div>	
-      			</div>
 	      	</div>
 	      </div>
 	  </div>
+	  <script src="../js/jquery-3.2.1.js"></script>
+	  <script>
+	  	var exist = false;
+	  	$(document).ready(function(){
+	  		$('#disp_groupe').on('click', function(){ 
+	  			
+	  			if(exist){
+	  				$('#test').remove(); // we remove the old list of groupes which correspond to the ex module selected
+	  			}
+	  			
+	  			$.ajax({
+	  				url : 'groupes',
+	  				type : 'POST',
+	  				dataType: 'html',
+	  				data : {
+	  					module : $('#modules').val()
+	  				},
+	  				success : function(groupes,statut) {
+	  					$('#groupes').append(groupes);
+	  					exist = true;
+	  				}
+	  			}); 
+	  		});
+	  	});
+	  </script>
 	</body>
 </html>

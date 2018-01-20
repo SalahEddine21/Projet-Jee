@@ -23,4 +23,26 @@
 		<servlet-name>Profil</servlet-name>
 		<url-pattern>/Profs/profil</url-pattern>
 	</servlet-mapping> 	
+	
+	<!-- Deconnexion -->
+	<servlet>
+		<servlet-name>Deconnexion</servlet-name>
+		<servlet-class>com.sdz.servlets.DeconnexionProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Deconnexion</servlet-name>
+		<url-pattern>/Profs/deconnexion</url-pattern>
+	</servlet-mapping> 		
+	
+	<!-- Groupes -->
+	<servlet>
+		<servlet-name>groupes</servlet-name>
+		<servlet-class>com.sdz.servlets.GroupesProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>groupes</servlet-name>
+		<url-pattern>/Profs/groupes</url-pattern>
+	</servlet-mapping> 		
 </web-app>
