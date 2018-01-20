@@ -170,11 +170,36 @@ insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_
 
 
 insert into professeurs (cin_prof, nom_prof, prenom_prof, email_prof, pass_prof) values ('wb175482','nomp', 'prenomp', 's0@gmail.com', 'test');
-
 insert into professeurs (cin_prof, nom_prof, prenom_prof, email_prof, pass_prof) values ('wb175582','nomp1', 'prenomp1', 's1@gmail.com', 'test');
-
-
 insert into professeurs (cin_prof, nom_prof, prenom_prof, email_prof, pass_prof) values ('wb175682','nomp2', 'prenomp2', 's2@gmail.com', 'test');
+
+
+insert into modules (titre_mod, semestre_mod, annee_mod, id_prof) values ('jee', 's3', '2017', 1);
+insert into modules (titre_mod, semestre_mod, annee_mod, id_prof) values ('android', 's3', '2017', 1);
+insert into modules (titre_mod, semestre_mod, annee_mod, id_prof) values ('c', 's1', '2017', 1);
+insert into modules (titre_mod, semestre_mod, annee_mod, id_prof) values ('c++', 's3', '2017', 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
