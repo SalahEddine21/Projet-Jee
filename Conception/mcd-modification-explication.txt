@@ -5,3 +5,7 @@ dans l'ex mcd on a associer à chaque groupe à un et un seul profs, donc si un gr
 effectivement faire) on peut pas savoir le module que ce prof enseigne.
 
 la solution donc c'est qu'on doit faire apparaitre une association entre le prof et le module qui permettra ainsi de savoir les modules que ce prof prend en charge.
+
+2 modification: seances correspond module
+-----------------------------------------
+si un groupe étudie plusieurs modules, comment peut on savoir les séances qui correspond à tel ou tel module, on doit filtrer les séances premierement et obligatoirement par l'id du groupe ms aussi l'id du module car un groupe peut avoir plusieurs seances chaqune dans un module spécifique.
