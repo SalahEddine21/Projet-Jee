@@ -8,10 +8,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrapp.css">
 
 	<!-- Theme style  -->
-        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="css/style2.css">
 	<!-- Modernizr JS -->
 
 
@@ -92,7 +92,7 @@
                     </form>
                 </div>
                 <div class="panel-footer">
-                    <a href=""#"">Mot de passe oublié</a></div>
+                    <a href=""#"">Mot de passe oublie</a></div>
             </div>
         </div>
     </div>
