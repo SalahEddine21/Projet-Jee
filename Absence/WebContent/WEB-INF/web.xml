@@ -45,4 +45,15 @@
 		<servlet-name>groupes</servlet-name>
 		<url-pattern>/Profs/groupes</url-pattern>
 	</servlet-mapping> 		
+	
+	<!-- Seances -->
+	<servlet>
+		<servlet-name>seances</servlet-name>
+		<servlet-class>com.sdz.servlets.SeancesProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>seances</servlet-name>
+		<url-pattern>/Profs/seances</url-pattern>
+	</servlet-mapping> 	
 </web-app>

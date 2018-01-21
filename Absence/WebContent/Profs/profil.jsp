@@ -47,7 +47,7 @@
 					 <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
 				</div>
 	      	</div>
-	      	<div class="col-lg-6">
+	      	<div class="col-lg-8">
 	      	
 					<c:choose>
 					
@@ -74,11 +74,12 @@
 						<c:otherwise>
 							<div class="row">
 				      			<div class="col-lg-12">
-				      				<h4 style="margin-top:10px;" >Liste des Modules</h4>
+				      				<h4 style="margin-top:10px;" >Espace d'appel</h4>
 				      			</div>		
 				      		</div>	
+				      		
 				      		<div class="row">
-				      			<div class="col-lg-12">
+					      		<div class="col-lg-8">
 									<div class="form-group">
 										<label for="sel1">Selectionner un Module</label>
 										<select class="form-control" id="modules">
@@ -86,18 +87,16 @@
 												<option value="${modules.id}" >${modules.titre}</option>
 											</c:forEach>
 										</select>
-									</div>			      				
-				      			</div>
-				      		</div>	
-				      		<div class="row">
-								<div class="col-lg-12">
-									<button id="disp_groupe" class="btn btn-deep-purple" >Afficher Groupes</button>
-									<p>${requestScope.query1}</p>
-								</div>	
+									</div>
+									<p>${requestScope.query1}</p>			      				
+					      		</div>
+								<div class="col-lg-4">
+									<button id="disp_groupe" class="btn btn-deep-purple" style="margin-top:30px;" >Afficher Groupes</button>
+								</div>						
 				      		</div>
-				      		<div class="row">
-								<div class="col-lg-12" id="groupes"></div>
-				      		</div>				
+				      			
+							<div id="groupes"></div> <!-- Do not delete this element look down to know why -->	
+							<div id="seances"></div> <!-- Do not delete this element look down to know why -->
 						</c:otherwise>
 						
 					</c:choose>
@@ -107,14 +106,13 @@
 	  </div>
 	  <script src="../js/jquery-3.2.1.js"></script>
 	  <script>
-	  	var exist = false;
+	  	var exist = false,seance = false;
 	  	$(document).ready(function(){
+	  		
 	  		$('#disp_groupe').on('click', function(){ 
-	  			
 	  			if(exist){
 	  				$('#test').remove(); // we remove the old list of groupes which correspond to the ex module selected
 	  			}
-	  			
 	  			$.ajax({
 	  				url : 'groupes',
 	  				type : 'POST',
@@ -124,11 +122,45 @@
 	  				},
 	  				success : function(groupes,statut) {
 	  					$('#groupes').append(groupes);
-	  					exist = true;
+	  					exist = true;	
+	  				  	add();
 	  				}
 	  			}); 
 	  		});
+	  		
+	  		$('#modules').change(function(){
+	  			if(exist){
+	  				$('#test').remove();
+	  				exist = false;
+	  				if(seance){
+	  					$('#list_seances').remove();
+	  					seance = false;
+	  				}
+	  			}
+	  		});
+			function add(){
+				$('#dispseance').click(function(){
+		  			$.ajax({
+		  				url : 'seances',
+		  				type : 'GET',
+		  				dataType: 'html',
+		  				data :  {module : $('#modules').val(), groupe : $('#groupe').val() },
+		  				success : function(seances,statut) {
+		  					$('#seances').append(seances);
+		  					seance = true;
+		  				}
+		  			}); 
+				});	
+				$('#groupe').change(function(){
+					if(seance){
+	  					$('#list_seances').remove();
+	  					seance = false;						
+					}
+				});
+			}
+			
 	  	});
+	  	
 	  </script>
 	</body>
 </html>

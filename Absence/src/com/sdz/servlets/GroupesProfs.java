@@ -19,9 +19,9 @@ public class GroupesProfs extends HttpServlet {
 			List<Integer> groupes = Operations_Prof.getGroupes(id_mod);
 			String result;
 			
-			result = "<div id='test' ><label>Selectionner un Groupe</label> <select class='form-control'>";
+			result = "<div id='test' class='row'> <div class='col-lg-8'><label>Selectionner un Groupe</label> <select class='form-control' id='groupe'>";
 			for(int i=0 ;i<groupes.size(); i++)	result = result + "<option value="+groupes.get(i)+">Groupe "+groupes.get(i)+"</option>";
-			result = result +"</select><button id='disp_sceance' class='btn btn-deep-purple'> Afficher les séances </button> </div>";
+			result = result +"</select> </div> <div class='col-lg-4'> <button id='dispseance' class='btn btn-deep-purple' style='margin-top:20px;'> Afficher les séances </button></div> </div>";
 			
 			response.setContentType("text/html");
 			response.getWriter().write(result);
