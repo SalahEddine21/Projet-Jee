@@ -191,22 +191,50 @@ insert into mod_group values (2,4);
 insert into mod_group values (3,3);
 
 
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-01', '8h-10h', 1);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-04', '14h-16h', 1);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-05', '8h-10h', 1);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-07', '16h-18h', 1);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-09', '10h-12h', 1);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-10', '8h-10h', 1);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-12', '10h-12h', 1);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-13', '8h-10h', 1);
+
+
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-02', '8h-10h', 2);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-03', '14h-16h', 2);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-06', '8h-10h', 2);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-08', '16h-18h', 2);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-10', '10h-12h', 2);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-11', '8h-10h', 2);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-13', '10h-12h', 2);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-10-15', '8h-10h', 2);
 
 
 
 
 
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-09-01', '8h-10h', 3);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-09-04', '10h-12h', 3);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-09-05', '14h-16h', 3);
+insert into seances (date_seance, heure_seance, id_groupe) values ('2017-09-07', '16h-18h', 3);
 
 
 
+alter table seances add id_mod int;
+alter table seances add constraint foreign key(id_mod) references modules(id_mod);
 
 
+update seances set id_mod = 1 where id_seance >=1 and id_seance <= 2;
+update seances set id_mod = 2 where id_seance > 2 and id_seance <= 5;
+update seances set id_mod = 4 where id_seance >=6 and id_seance <= 8;
+
+update seances set id_mod = 1 where id_seance >=9 and id_seance <= 11;
+update seances set id_mod = 2 where id_seance >= 12 and id_seance < 15;
+update seances set id_mod = 4 where id_seance >= 15 and id_seance <= 16;
+
+update seances set id_mod = 3 where id_seance > 16;
 
 
-
-
-
-
-
-
+drop table prof_eval;
 
