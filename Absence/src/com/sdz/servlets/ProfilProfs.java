@@ -15,11 +15,6 @@ import com.sdz.database.Operations_Prof;
 
 public class ProfilProfs extends HttpServlet {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		HttpSession session = request.getSession();
 		Professeur prof = (Professeur) session.getAttribute("prof");
@@ -27,14 +22,7 @@ public class ProfilProfs extends HttpServlet {
 		
 		try {
 			List<Module> modules = Operations_Prof.getModules(id_prof);
-			if(!modules.isEmpty()){ // the teacher should have at least one course, to run the app 
-				if(modules.size() == 1){ // if the teacher have only one course, then automatically we'll display the groupes he have
-					 List<Integer> groupes = Operations_Prof.getGroupes(modules.get(0).getId());
-					 request.setAttribute("titre_module", modules.get(0).getTitre());
-					 request.setAttribute("groupes", groupes);
-					 //add the case if we have just one groupe -> display the sessions directly
-				}
-			}
+			if(modules.isEmpty()) request.setAttribute("no_module", "Vous n'enseigner aucun module !");
 			request.setAttribute("modules", modules);
 		} catch (Exception e) {
 			request.setAttribute("query", e.getMessage());

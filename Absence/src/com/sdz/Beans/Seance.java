@@ -7,7 +7,16 @@ public class Seance {
 	private int id;
 	private Date date;
 	private String heure;
+	private int appel;
 	
+	public int getAppel() {
+		return appel;
+	}
+
+	public void setAppel(int appel) {
+		this.appel = appel;
+	}
+
 	public Seance(){}
 
 	public int getId() {

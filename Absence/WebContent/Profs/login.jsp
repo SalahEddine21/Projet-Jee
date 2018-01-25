@@ -14,10 +14,13 @@
 			    <a class="navbar-brand" href="../hello_world.jsp">Accueil</a>
 			      <ul class="navbar-nav mr-auto">
 			          <li class="nav-item">
-			              <a class="nav-link waves-light" >Administrateur</a>
+			              <a class="nav-link waves-light" href="../Admin/login.jsp" >Administrateur</a>
 			          </li>
 			          <li class="nav-item">
 			              <a class="nav-link waves-light"  href="login.jsp">Professeurs</a>
+			          </li>
+			          <li class="nav-item">
+			              <a class="nav-link waves-light"  href="../Etudiants/login.jsp">Etudiants</a>
 			          </li>
 			      </ul>
 			</nav>

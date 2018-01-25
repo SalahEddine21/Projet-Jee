@@ -10,11 +10,6 @@ import javax.servlet.http.HttpSession;
 
 public class DeconnexionProfs extends HttpServlet {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		
 		HttpSession session = request.getSession();

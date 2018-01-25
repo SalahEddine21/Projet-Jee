@@ -1,67 +1,226 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>Gestion_des_absences</display-name>
   <display-name>Gestion des absences</display-name>
-  <servlet>
-    <servlet-name>Connexion</servlet-name>
-    <servlet-class>com.sdz.servlets.ConnexionProfs</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Connexion</servlet-name>
-    <url-pattern>/Profs/connexion</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Profil</servlet-name>
-    <servlet-class>com.sdz.servlets.ProfilProfs</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Profil</servlet-name>
-    <url-pattern>/Profs/profil</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Deconnexion</servlet-name>
-    <servlet-class>com.sdz.servlets.DeconnexionProfs</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Deconnexion</servlet-name>
-    <url-pattern>/Profs/deconnexion</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>groupes</servlet-name>
-    <servlet-class>com.sdz.servlets.GroupesProfs</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>groupes</servlet-name>
-    <url-pattern>/Profs/groupes</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>ConnexionAdmin</servlet-name>
-    <servlet-class>com.sdz.servlets.ConnexionAdmin</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>ConnexionAdmin</servlet-name>
-    <url-pattern>/Admin/ConnexionAdmin</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>DeconnexionAdmin</servlet-name>
-    <servlet-class>com.sdz.servlets.DeconnexionAdmin</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>DeconnexionAdmin</servlet-name>
-    <url-pattern>/Admin/deconnexionAdmin</url-pattern>
-  </servlet-mapping>
-  
- <servlet>
-  	<servlet-name>ProfilAdmin</servlet-name>
-    <servlet-class>com.sdz.servlets.ProfilAdmin</servlet-class>
- </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>ProfilAdmin</servlet-name>
-    <url-pattern>/Admin/profilAdmin</url-pattern>
-  </servlet-mapping>
+  												<!-- Partie Professeur -->
+  	<!-- Connexion -->
+	<servlet>
+		<servlet-name>Connexion</servlet-name>
+		<servlet-class>com.sdz.servlets.ConnexionProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Connexion</servlet-name>
+		<url-pattern>/Profs/connexion</url-pattern>
+	</servlet-mapping> 
+	 
+	<!-- Profil -->
+	<servlet>
+		<servlet-name>Profil</servlet-name>
+		<servlet-class>com.sdz.servlets.ProfilProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Profil</servlet-name>
+		<url-pattern>/Profs/profil</url-pattern>
+	</servlet-mapping> 	
+	
+	<!-- Deconnexion -->
+	<servlet>
+		<servlet-name>Deconnexion</servlet-name>
+		<servlet-class>com.sdz.servlets.DeconnexionProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Deconnexion</servlet-name>
+		<url-pattern>/Profs/deconnexion</url-pattern>
+	</servlet-mapping> 		
+	
+	<!-- Groupes -->
+	<servlet>
+		<servlet-name>groupes</servlet-name>
+		<servlet-class>com.sdz.servlets.GroupesProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>groupes</servlet-name>
+		<url-pattern>/Profs/groupes</url-pattern>
+	</servlet-mapping> 		
+	
+	<!-- Seances -->
+	<servlet>
+		<servlet-name>seances</servlet-name>
+		<servlet-class>com.sdz.servlets.SeancesProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>seances</servlet-name>
+		<url-pattern>/Profs/seances</url-pattern>
+	</servlet-mapping> 	
+	
+	<!-- AppelEtudiants -->
+	<servlet>
+		<servlet-name>appel</servlet-name>
+		<servlet-class>com.sdz.servlets.AppelEtudiants</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>appel</servlet-name>
+		<url-pattern>/Profs/appel</url-pattern>
+	</servlet-mapping>
+	
+	<!-- PrésenceEtudiants -->
+	<servlet>
+		<servlet-name>presence</servlet-name>
+		<servlet-class>com.sdz.servlets.PresencesProfs</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>presence</servlet-name>
+		<url-pattern>/Profs/presence</url-pattern>
+	</servlet-mapping>
+	
+	<!-- aller à la Modification d'une Liste d'absence -->
+	<servlet>
+		<servlet-name>modification_absence</servlet-name>
+		<servlet-class>com.sdz.servlets.ModifierListe_Prof</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>modification_absence</servlet-name>
+		<url-pattern>/Profs/modifierListe</url-pattern>
+	</servlet-mapping>
+
+	<!-- Afficher et Modifier Liste d'absence -->
+	<servlet>
+		<servlet-name>afficher_modifier_list</servlet-name>
+		<servlet-class>com.sdz.servlets.ListModif_Prof</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>afficher_modifier_list</servlet-name>
+		<url-pattern>/Profs/afficher_modifier_List</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Enregistrer les modifications  -->
+	<servlet>
+		<servlet-name>enregistrement_modif</servlet-name>
+		<servlet-class>com.sdz.servlets.ModificationPresences_Prof</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>enregistrement_modif</servlet-name>
+		<url-pattern>/Profs/enregistrer_modif_presence</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Detail Etudiant  -->
+	<servlet>
+		<servlet-name>detailEtd</servlet-name>
+		<servlet-class>com.sdz.servlets.DetailEtd_Prof</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>detailEtd</servlet-name>
+		<url-pattern>/Profs/detailEtd</url-pattern>
+	</servlet-mapping>
+
+	<!-- Detail Groupe  -->
+	<servlet>
+		<servlet-name>detailGrp</servlet-name>
+		<servlet-class>com.sdz.servlets.DetailGrp_Prof</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>detailGrp</servlet-name>
+		<url-pattern>/Profs/detailGrp</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Lancement evaluation  -->
+	<servlet>
+		<servlet-name>lancerEval</servlet-name>
+		<servlet-class>com.sdz.servlets.LancerEval</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>lancerEval</servlet-name>
+		<url-pattern>/Profs/lancerEval</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Lister modules/groupe Attribuer Note -->
+	<servlet>
+		<servlet-name>attrNote</servlet-name>
+		<servlet-class>com.sdz.servlets.AttribuerNotes_Prof</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>attrNote</servlet-name>
+		<url-pattern>/Profs/attribuerNote</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Lister etudiants Attribuer Note -->
+	<servlet>
+		<servlet-name>listEtd_attrNote</servlet-name>
+		<servlet-class>com.sdz.servlets.ListEtdNotes_Prof</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>listEtd_attrNote</servlet-name>
+		<url-pattern>/Profs/ListEtd_attrNotes</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Lister etudiants Attribuer Note -->
+	<servlet>
+		<servlet-name>StockNote</servlet-name>
+		<servlet-class>com.sdz.servlets.StockNotes_Prof</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>StockNote</servlet-name>
+		<url-pattern>/Profs/noteFinaux</url-pattern>
+	</servlet-mapping>
+	
+	<!-- ************************************ ETUDIANT *************************************** -->
+	
+	<!-- Connexion etudiant -->
+	<servlet>
+		<servlet-name>ConnexionEtd</servlet-name>
+		<servlet-class>com.sdz.servlets.Connexion_Etds</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ConnexionEtd</servlet-name>
+		<url-pattern>/Etudiants/connexion</url-pattern>
+	</servlet-mapping>	
+	
+	<!-- Profil -->
+	<servlet>
+		<servlet-name>ProfilEtd</servlet-name>
+		<servlet-class>com.sdz.servlets.ProfilEtd</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ProfilEtd</servlet-name>
+		<url-pattern>/Etudiants/profil</url-pattern>
+	</servlet-mapping>	
+	
+	<!-- Deconnexion -->
+	<servlet>
+		<servlet-name>DeconnexionEtd</servlet-name>
+		<servlet-class>com.sdz.servlets.DeconnexionEtds</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DeconnexionEtd</servlet-name>
+		<url-pattern>/Etudiants/deconnexion</url-pattern>
+	</servlet-mapping>	
+	
+	<!-- Changement -->
+	<servlet>
+		<servlet-name>changement</servlet-name>
+		<servlet-class>com.sdz.servlets.ChangementGrp_Etd</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>changement</servlet-name>
+		<url-pattern>/Etudiants/changement</url-pattern>
+	</servlet-mapping>
 </web-app>

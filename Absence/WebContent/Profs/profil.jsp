@@ -9,22 +9,7 @@
 		<link href="../css/mdb.css" rel="stylesheet">
 	</head>
 	<body>
-		<header>
-			<navbar Class="navbar navbar-expand-lg navbar-dark black-sell">
-			    <logo><a class="navbar-brand" href="#">Accueil</a></logo>
-			
-			        <ul class="navbar-nav mr-auto">
-			            <li class="nav-item">
-			                <a class="nav-link waves-light" href="accueilClient" >Appel</a>
-			            </li>
-			        </ul>
-	
-			 		<div class="form-inline  waves-light" >
-			 			<a class="btn btn-outline-default waves-effect btn-sm" href="deconnexion" >Deconnexion</a>
-			 		</div> 
-			</navbar>
-		</header>
-
+		<jsp:include page = "Prof_navbar.jsp" />
 		<div class="container">
 		
 	      <div class="row" style="margin-top:50px;">
@@ -35,7 +20,7 @@
 	            <ol class="breadcrumb">
 		           <li><a href="">Accueil</a>
 	               </li>
-		           <li class="active">Professeur</li>
+		           <li class="active">Professeur/Appel</li>
 	            </ol>
 	          </div>
 	      </div>	
@@ -43,32 +28,27 @@
 	      <div class="row" >
 	      	<div class="col-lg-4">
 				<div class="list-group">
-					 <a href="profil" class="list-group-item active"> Appel </a>
-					 <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+					 <a href="profil" class="list-group-item active">Appel</a>
+					 <a href="modifierListe" class="list-group-item list-group-item-action">Modifier Une Liste</a>
+					 <a href="lancerEval" class="list-group-item list-group-item-action">Lancer Une evaluation</a>
+					 <a href="attribuerNote" class="list-group-item list-group-item-action">Attribuer Les Notes</a>
 				</div>
 	      	</div>
 	      	<div class="col-lg-8">
 	      	
 					<c:choose>
 					
-						<c:when test="${!empty requestScope.titre_module}" >
+						<c:when test="${!empty requestScope.no_module}" >
 							<div class="row">
 				      			<div class="col-lg-12">
-				      				<h4 style="margin-top:10px;" >Module: ${requestScope.titre_module}</h4>
+				      				<h4 style="margin-top:10px;" >Information</h4>
 				      			</div>		
 				      		</div>	
-			      			<div class="row">
-								<div class="col-lg-12">
-									<div class="form-group">
-										<label for="sel1">Selectionner un groupe</label>
-										<select class="form-control">
-											<c:forEach items="${requestScope.groupes}" var="groupes" >
-												<option value="${groupes}" > Groupe ${groupes} </option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-			      			</div>				
+				      		<div class="row">
+				      			<div class="col-lg-8">
+				      				<p><strong>${requestScope.no_module}</strong></p>
+				      			</div>
+				      		</div>
 						</c:when>
 						
 						<c:otherwise>
@@ -96,7 +76,11 @@
 				      		</div>
 				      			
 							<div id="groupes"></div> <!-- Do not delete this element look down to know why -->	
-							<div id="seances"></div> <!-- Do not delete this element look down to know why -->
+							
+							<form id='seances' action="<c:url value="appel" />" method='post' >
+								
+							</form>
+							
 						</c:otherwise>
 						
 					</c:choose>
@@ -139,18 +123,20 @@
 	  			}
 	  		});
 			function add(){
-				$('#dispseance').click(function(){
-		  			$.ajax({
-		  				url : 'seances',
-		  				type : 'GET',
-		  				dataType: 'html',
-		  				data :  {module : $('#modules').val(), groupe : $('#groupe').val() },
-		  				success : function(seances,statut) {
-		  					$('#seances').append(seances);
-		  					seance = true;
-		  				}
-		  			}); 
-				});	
+				if(!seance){
+					$('#dispseance').click(function(){
+			  			$.ajax({
+			  				url : 'seances',
+			  				type : 'GET',
+			  				dataType: 'html',
+			  				data :  {module : $('#modules').val(), groupe : $('#groupe').val() },
+			  				success : function(seances,statut) {
+			  					$('#seances').append(seances);
+			  					seance = true;
+			  				}
+			  			}); 
+					});	
+				}
 				$('#groupe').change(function(){
 					if(seance){
 	  					$('#list_seances').remove();

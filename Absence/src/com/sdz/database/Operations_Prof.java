@@ -10,12 +10,15 @@ import java.util.List;
 
 import com.sdz.Beans.Module;
 import com.sdz.Beans.Professeur;
+import com.sdz.Beans.Seance;
 
 public class Operations_Prof {
 
 	private static String SQL_SELECT_PROF = " select * from professeurs where cin_prof = ? ";
 	private static String SQL_SELECT_MODULE_PROF = "select * from modules where id_prof = ? ";
 	private static String SQL_SELECT_GROUPES_PROF = " select id_groupe from mod_group where id_mod = ? ";
+	private static String SQL_SELECT_SEANCES_PROF = "select * from seances where id_groupe = ? and id_mod = ?";
+	private static String SQL_SELECT_MOD_EVAL = " select id_mod as id, titre_mod as titre from modules where id_prof = ? and id_mod in (select id_mod from evaluations) ";
 	
 	public static Professeur findProfByCin(String cin)throws Exception{
 		
@@ -75,6 +78,49 @@ public class Operations_Prof {
 		return groupes;
 	}
 	
+	public static List<Seance> getSeances(int groupe, int module) throws Exception{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet result=null;	
+		List<Seance> seances = new ArrayList<Seance>();
+
+		connection = Connection_Database.getConnecion();
+		preparedStatement = getPreparedStatement(SQL_SELECT_SEANCES_PROF, connection, false, groupe, module);
+		result = preparedStatement.executeQuery();
+		
+		while(result.next()){
+			Seance s = new Seance();
+			s.setId(result.getInt("id_seance"));
+			s.setDate(result.getDate("date_seance"));
+			s.setHeure(result.getString("heure_seance"));
+			seances.add(s);
+		}
+		
+		return seances;
+	}
+	
+	public static List<Module> getModules_Eval(int id_prof) throws Exception{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet result=null;	
+		
+
+		connection = Connection_Database.getConnecion();
+		preparedStatement = getPreparedStatement(SQL_SELECT_MOD_EVAL, connection, false, id_prof);
+		result = preparedStatement.executeQuery();		
+		
+		List<Module> modules = new ArrayList<Module>();
+		Module m;
+		
+		while(result.next()){
+			m = new Module();
+			m.setId(result.getInt("id"));
+			m.setTitre(result.getString("titre"));
+			
+			modules.add(m);
+		}
+		return modules;
+	}
 	//--------------------------------------------------------------------------------------------------------------------------------------//
 	private static PreparedStatement getPreparedStatement(String query,Connection connection,boolean ind,Object...objects) throws Exception{
 		try{
