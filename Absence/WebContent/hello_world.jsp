@@ -35,7 +35,7 @@
    <a class="navbar-brand" href="#"> Absence </a>
    
        <div class="navbar-collapse collapse">
-           <ul class="nav navbar-nav navbar-right">
+           <ul class="nav navbar-nav navbar-left">
 		     <li class=""><a href="Admin/loginAdmin.jsp">Administrateur</a> </li>
 			 <li> <a href="Profs/login.jsp">Professeur</a> </li>
 			    <li> <a href="Contact.jsp">Contactez-nous</a> </li>
@@ -103,7 +103,7 @@
 <section class="index-link">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="link-area">
                     <h3>Projet Jee</h3>
                     <P>Realisation d'une application web de gestion des absences scolaires</P>
@@ -111,7 +111,7 @@
                     
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="link-area">
                     <h3>ENSIAS-RABAT</h3>
                     <ul>

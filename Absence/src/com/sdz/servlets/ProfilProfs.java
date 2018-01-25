@@ -15,6 +15,11 @@ import com.sdz.database.Operations_Prof;
 
 public class ProfilProfs extends HttpServlet {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		HttpSession session = request.getSession();
 		Professeur prof = (Professeur) session.getAttribute("prof");

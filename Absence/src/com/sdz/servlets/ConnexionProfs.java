@@ -13,6 +13,11 @@ import com.sdz.Controles.ControleProf;
 
 public class ConnexionProfs extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		ControleProf controle = new ControleProf();
 		Professeur prof = controle.CheckProf(request);
