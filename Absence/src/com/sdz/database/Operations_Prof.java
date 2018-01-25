@@ -10,14 +10,12 @@ import java.util.List;
 
 import com.sdz.Beans.Module;
 import com.sdz.Beans.Professeur;
-import com.sdz.Beans.Seance;
 
 public class Operations_Prof {
 
 	private static String SQL_SELECT_PROF = " select * from professeurs where cin_prof = ? ";
 	private static String SQL_SELECT_MODULE_PROF = "select * from modules where id_prof = ? ";
 	private static String SQL_SELECT_GROUPES_PROF = " select id_groupe from mod_group where id_mod = ? ";
-	private static String SQL_SELECT_SEANCES_PROF = "select * from seances where id_groupe = ? and id_mod = ?";
 	
 	public static Professeur findProfByCin(String cin)throws Exception{
 		
@@ -77,26 +75,6 @@ public class Operations_Prof {
 		return groupes;
 	}
 	
-	public static List<Seance> getSeances(int groupe, int module) throws Exception{
-		Connection connection=null;
-		PreparedStatement preparedStatement=null;
-		ResultSet result=null;	
-		List<Seance> seances = new ArrayList<Seance>();
-
-		connection = Connection_Database.getConnecion();
-		preparedStatement = getPreparedStatement(SQL_SELECT_SEANCES_PROF, connection, false, groupe, module);
-		result = preparedStatement.executeQuery();
-		
-		while(result.next()){
-			Seance s = new Seance();
-			s.setId(result.getInt("id_seance"));
-			s.setDate(result.getDate("date_seance"));
-			s.setHeure(result.getString("heure_seance"));
-			seances.add(s);
-		}
-		
-		return seances;
-	}
 	//--------------------------------------------------------------------------------------------------------------------------------------//
 	private static PreparedStatement getPreparedStatement(String query,Connection connection,boolean ind,Object...objects) throws Exception{
 		try{
