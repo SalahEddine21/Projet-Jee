@@ -235,6 +235,31 @@ update seances set id_mod = 4 where id_seance >= 15 and id_seance <= 16;
 
 update seances set id_mod = 3 where id_seance > 16;
 
+alter table absences add justifier int;
 
-drop table prof_eval;
+update absences set justifier = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
