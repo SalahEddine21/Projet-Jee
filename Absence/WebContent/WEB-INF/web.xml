@@ -223,4 +223,34 @@
 		<servlet-name>changement</servlet-name>
 		<url-pattern>/Etudiants/changement</url-pattern>
 	</servlet-mapping>
-</web-app>
+<!-- ---------------------------------------- Admin --------------------------------------------->
+<servlet>
+    <servlet-name>ConnexionAdmin</servlet-name>
+    <servlet-class>com.sdz.servlets.ConnexionAdmin</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ConnexionAdmin</servlet-name>
+    <url-pattern>/Admin/ConnexionAdmin</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DeconnexionAdmin</servlet-name>
+    <servlet-class>com.sdz.servlets.DeconnexionAdmin</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>DeconnexionAdmin</servlet-name>
+    <url-pattern>/Admin/deconnexionAdmin</url-pattern>
+  </servlet-mapping>
+  
+ <servlet>
+  	<servlet-name>ProfilAdmin</servlet-name>
+    <servlet-class>com.sdz.servlets.ProfilAdmin</servlet-class>
+ </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ProfilAdmin</servlet-name>
+    <url-pattern>/Admin/profilAdmin</url-pattern>
+  </servlet-mapping>
+  </web-app>
