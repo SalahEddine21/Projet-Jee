@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.sdz.Beans.Etudiant;
 import com.sdz.Beans.Etudiant_Absence;
 import com.sdz.Beans.Seance;
 import com.sdz.database.Operations_Presences;
@@ -37,7 +39,7 @@ public class ListModif_Prof extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		id_seance = Integer.valueOf(request.getParameter("id_seance"));	
-		
+		HttpSession session = request.getSession();
 		try {
 			
 			etd_abs = Operations_Presences.getStudents_Presences(id_seance);
@@ -46,8 +48,6 @@ public class ListModif_Prof extends HttpServlet {
 				id_groupe = Operations_seances.getGroupeID(id_seance);
 				s = Operations_seances.getSeanceByID(id_seance);
 				count = etd_abs.size();
-				id_min = etd_abs.get(0).getId();
-				id_max = etd_abs.get(count-1).getId();
 				
 				request.setAttribute("etudiants", etd_abs);
 				request.setAttribute("groupe", id_groupe);
@@ -55,9 +55,19 @@ public class ListModif_Prof extends HttpServlet {
 				request.setAttribute("heure_seance", s.getHeure());
 				
 				request.setAttribute("count", count);
-				request.setAttribute("id_min", id_min);
-				request.setAttribute("id_max", id_max);
 				request.setAttribute("id_seance", id_seance);
+				
+				String[] ids = new String[count];
+				String id;
+				int i=0;
+				
+				for(Etudiant_Absence e : etd_abs){
+					id = String.valueOf(e.getId());
+					ids[i] = id;
+					i = i +1;
+				}
+				//---
+				session.setAttribute("ids", ids);
 			}
 		} catch (Exception e) {
 			request.setAttribute("query", e.getMessage());

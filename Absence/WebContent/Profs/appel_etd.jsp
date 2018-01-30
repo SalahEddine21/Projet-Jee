@@ -90,9 +90,7 @@
 											<button type="submit" class="btn btn-deep-orange">Enregistrer</button>
 										</div>
 									</div>
-								</div>							
-								<input type="hidden" value="${requestScope.id_min}" name="id_min" />	
-								<input type="hidden" value="${requestScope.id_max}" name="id_max" />	
+								</div>								
 								<input type="hidden" value="${requestScope.id_seance}" name="id_seance" />	
 							</form>						
 						</c:otherwise>

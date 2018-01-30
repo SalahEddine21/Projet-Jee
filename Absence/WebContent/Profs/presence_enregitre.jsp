@@ -57,6 +57,12 @@
 					<p style="color:red">${requestScope.query}</p>
 				</div>
 	      </div>
+	      <p>${requestScope.box}</p>
+	      <p>${requestScope.box1}</p>
+	      <p>${requestScope.fe}</p>
+	      <p>${requestScope.fee}</p>
+	      	      <p>${requestScope.re}</p>
+	      	      <p>${requestScope.pe}</p>
 	      
 	    </div> 	
 	</body>

@@ -17,35 +17,29 @@ public class ModificationPresences_Prof extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		//--------
 		HttpSession session = request.getSession();
-		Professeur prof = (Professeur) session.getAttribute("prof");
-		int id_prof = prof.getId();
 		//-----------
-		int id_min = Integer.valueOf(request.getParameter("id_min"));
-		int id_max = Integer.valueOf(request.getParameter("id_max"));
 		int id_seance = Integer.valueOf(request.getParameter("id_seance"));
 		
-		String box_val,box_justifier;		
 		int present, justifier;
 		Absence a = new Absence();
 		
 		try{
-			for(int i=id_min ;i<=id_max; i++){
-				
-				box_val = String.valueOf(request.getParameter(String.valueOf(i)));
-				if(box_val.equals("on")) present = 1;
+			String[] ids = (String[]) session.getAttribute("ids");
+			
+			for(int i=0 ;i<=ids.length; i++){
+				if(request.getParameter(ids[i]) != null) present = 1;
 				else present = 0;
-
-				box_justifier = String.valueOf(request.getParameter(String.valueOf(i+100)));
-				if(box_justifier.equals("on")) justifier = 1;
-				else justifier = 0;				
 				
-				a.setId_etd(i);
+				if(request.getParameter(String.valueOf(Integer.valueOf(ids[i])+100)) != null) justifier = 1;
+				else justifier = 0;
+				
+				a.setId_etd(Integer.valueOf(ids[i]));
 				a.setId_seance(id_seance);
 				a.setPresent(present);
-				a.setJustifier(justifier);
-				
+				a.setJustifier(justifier);					
 				Operations_Presences.UpdateLine(a);
 			}
+			session.removeAttribute("ids");
 		}catch(Exception e){
 			request.setAttribute("query", e.getMessage());
 		}finally{

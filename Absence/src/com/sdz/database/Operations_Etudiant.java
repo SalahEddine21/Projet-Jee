@@ -1,12 +1,19 @@
 package com.sdz.database;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.sdz.Beans.Changement;
 import com.sdz.Beans.Etudiant;
@@ -16,12 +23,14 @@ import com.sdz.Beans.Seance_Presence;
 public class Operations_Etudiant {
 
 	private static String SQL_SELECT_STUDENT = " select * from etudiants where id_etd = ? ";
-	private static String SQL_SELECT_ABSENCE_PRESENCE_ETD = "select seances.date_seance as date, seances.heure_seance as heure, modules.titre_mod as module, absences.present as presence, absences.justifier as justifier from etudiants, absences, seances, modules where etudiants.id_etd = absences.id_etd and absences.id_seance = seances.id_seance and seances.id_mod = modules.id_mod and etudiants.id_etd = ? ";
+	private static String SQL_SELECT_ABSENCE_PRESENCE_ETD = "select seances.date_seance as date, seances.heure_seance as heure, modules.titre_mod as module, absences.present as presence, absences.justifier as justifier from etudiants, absences, seances, modules where etudiants.id_etd = absences.id_etd and absences.id_seance = seances.id_seance and seances.id_mod = modules.id_mod and etudiants.id_etd = ? ORDER BY date ASC";
 	private static String SQL_SELECT_NOTES = "select modules.titre_mod as module, etd_eval.note_etd as note from evaluations, etd_eval, modules where etd_eval.id_eval = evaluations.id_eval and evaluations.id_mod = modules.id_mod and etd_eval.id_etd = ? ";
 	private static String SQL_SELECT_CHANGES = "select id_groupe_src as src, date_ch as date from changements where id_etd = ?";
 	private static String SQL_SELECT_ETD = "select * from etudiants where num_etd = ?";
 	private static String SQL_CHECK_CHANGEMENT = " select * from changements where id_etd = ? ";
 	private static String SQL_UPDATE_GRP = " update etudiants set id_groupe = ? where id_etd = ? ";
+	private static String SQL_INSERT_STUDENT = " insert into etudiants (num_etd, nom_etd, prenom_etd, email_etd, id_groupe, pass_etd) values (?,?,?,?,?,?) ";
+	private static String SQL_DELETE_STDS = " delete from etudiants where id_groupe = ? ";
 	
 	public static Etudiant getStudent(int id_etd) throws Exception{
 		Connection connection=null;
@@ -152,10 +161,60 @@ public class Operations_Etudiant {
 		if(statuts == 0) throw new Exception("insert data error !");		
 	}
 	
+	public static void InsertStudents(int id_groupe, String chemin) throws Exception{
+		Connection con=null;
+		Etudiant e;
+		con = Connection_Database.getConnecion();
+        PreparedStatement pstm = null;
+        FileInputStream input = new FileInputStream(chemin);
+        XSSFWorkbook my_xls_workbook = new XSSFWorkbook(input);    
+        XSSFSheet my_worksheet = my_xls_workbook.getSheetAt(0); 
+        Iterator<Row> rowIterator = my_worksheet.iterator(); 
+        
+        while(rowIterator.hasNext()) {
+            Row row = rowIterator.next();   
+            Iterator<Cell> cellIterator = row.cellIterator();
+            Cell cell = cellIterator.next();
+            e = new Etudiant();
+            e.setNum(String.valueOf(cell.getNumericCellValue()));
+            Cell cell1 = cellIterator.next();
+            e.setNom(cell1.getStringCellValue());
+            Cell cell2 = cellIterator.next();
+            e.setPrenom(cell2.getStringCellValue());
+            Cell cell3 = cellIterator.next();
+            e.setEmail(cell3.getStringCellValue());
+            e.setId_groupe(id_groupe);
+            Cell cell4 = cellIterator.next();
+            e.setPasse(cell4.getStringCellValue());
+            
+            insertStudent(e, con);
+        }
+        input.close(); 		
+	}
+	
+	public static void insertStudent(Etudiant e, Connection c) throws Exception{
+		PreparedStatement preparedStatement=null;
+		preparedStatement = getPreparedStatement(SQL_INSERT_STUDENT,c,false,e.getNum(), e.getNom(), e.getPrenom(), e.getEmail(), e.getId_groupe(), e.getPasse());
+		int statuts = preparedStatement.executeUpdate();
+		if(statuts == 0) throw new Exception("insert data error !");
+		preparedStatement.close();
+	}
+	
+	public static void DeleteStudents(int id_groupe) throws Exception{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		
+		connection = Connection_Database.getConnecion();
+		preparedStatement = getPreparedStatement(SQL_DELETE_STDS,connection,false,id_groupe);
+		int statuts = preparedStatement.executeUpdate();	
+		if (statuts == 0) throw new Exception("cannot insert data");		
+	}
+	
 	//--------------------------------------------------------------------------------------------------------------------------//
 	private static PreparedStatement getPreparedStatement(String query,Connection connection,boolean ind,Object...objects) throws Exception{
 		try{
 			PreparedStatement prestat = connection.prepareStatement(query, ind ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS);
+			
 			for(int i = 0; i < objects.length; i++)
 				prestat.setObject(i+1, objects[i]);
 			return prestat;

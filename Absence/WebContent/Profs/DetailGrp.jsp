@@ -31,7 +31,6 @@
 	      		<div class="col-lg-5" style="border: 2px solid black;">
 	      			<p><strong>Groupe:</strong> ${requestScope.groupe.id}</p>
 	      			<p><strong>Semestre:</strong> ${requestScope.groupe.semestre}</p>
-	      			<p><strong>Annèe:</strong> ${requestScope.groupe.annee}</p>
 	      			<p><strong>Total Etudiants:</strong> ${requestScope.count}</p>
 	      		</div>
 	      	</div>

@@ -91,9 +91,7 @@
 										</div>
 									</div>
 								</div>
-								
-								<input type="hidden" value="${requestScope.id_min}" name="id_min" />	
-								<input type="hidden" value="${requestScope.id_max}" name="id_max" />	
+									
 								<input type="hidden" value="${requestScope.id_seance}" name="id_seance" />	
 							</form>
 						</c:otherwise>

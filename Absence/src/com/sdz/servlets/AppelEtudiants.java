@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sdz.Beans.Etudiant;
 import com.sdz.Beans.Seance;
@@ -21,7 +22,7 @@ public class AppelEtudiants extends HttpServlet {
 	private Seance s;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		
+		HttpSession session = request.getSession();
 		id_seance = Integer.valueOf(request.getParameter("id_seance"));	
 		int count;
 		try {
@@ -30,17 +31,27 @@ public class AppelEtudiants extends HttpServlet {
 			}else{
 				id_groupe = Operations_seances.getGroupeID(id_seance);
 				s = Operations_seances.getSeanceByID(id_seance);
-				List<Etudiant> etudiants = Operations_Groupe.getStudents(id_groupe);
+				List<Etudiant> etudiants = Operations_Groupe.getStudents(id_groupe);	
+				
 				count = etudiants.size();
+				String[] ids = new String[count];
+				String id;
+				int i=0;
+				
+				for(Etudiant e : etudiants){
+					id = String.valueOf(e.getId());
+					ids[i] = id;
+					i = i +1;
+				}
 				//---
+				session.setAttribute("ids", ids);
+				
 				request.setAttribute("etudiants", etudiants);	
 				request.setAttribute("count", count);
 				request.setAttribute("date_seance", s.getDate());
 				request.setAttribute("heure_seance", s.getHeure());
 				request.setAttribute("groupe", id_groupe);
 				
-				request.setAttribute("id_min", etudiants.get(0).getId());
-				request.setAttribute("id_max", etudiants.get(count-1).getId());
 				request.setAttribute("id_seance", id_seance);
 			}
 		} catch (Exception e) {
@@ -65,8 +76,6 @@ public class AppelEtudiants extends HttpServlet {
 			request.setAttribute("heure_seance", s.getHeure());
 			request.setAttribute("groupe", id_groupe);
 			
-			request.setAttribute("id_min", etudiants.get(0).getId());
-			request.setAttribute("id_max", etudiants.get(count-1).getId());
 			request.setAttribute("id_seance", id_seance);
 			
 		} catch (Exception e) {

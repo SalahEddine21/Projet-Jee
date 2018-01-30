@@ -24,17 +24,16 @@ public class SeancesProfs extends HttpServlet {
 		int id_module = Integer.valueOf(request.getParameter("module"));
 		
 		try {
-			List<Seance> seances = Operations_Prof.getSeances(id_groupe, id_module);
-			
 			String result;
-			result = "<div id='list_seances' class='row'><div class='col-lg-8'><label>Selectionner une Séance</label> <select name='id_seance' class='form-control'> ";
-			for(int i=0 ;i<seances.size(); i++) result = result + "<option value ="+seances.get(i).getId()+">"+seances.get(i).getDate()+" à "+seances.get(i).getHeure()+"</option>";
-			
-			result = result + "</select> </div> <div class='col-lg-4'> <button id='faire_appel' type='submit' class='btn btn-pink' style='margin-top:30px;'> Faire L'appel </button></div> </div>";
-			
+			List<Seance> seances = Operations_Prof.getSeances(id_groupe, id_module);
+			if(seances.isEmpty()) result = "<div id='list_seances' class='row'><div class='col-lg-8'><p>Aucune seance n'est trouvé</p></div></div>";
+			else{
+				result = "<div id='list_seances' class='row'><div class='col-lg-8'><label>Selectionner une Séance</label> <select name='id_seance' class='form-control'> ";
+				for(int i=0 ;i<seances.size(); i++) result = result + "<option value ="+seances.get(i).getId()+">"+seances.get(i).getDate()+" à "+seances.get(i).getHeure()+"</option>";
+				result = result + "</select> </div> <div class='col-lg-4'> <button id='faire_appel' type='submit' class='btn btn-pink' style='margin-top:30px;'> Faire L'appel </button></div> </div>";
+			}
 			response.setContentType("text/html");
 			response.getWriter().write(result);	
-			
 		} catch (Exception e) {
 			request.setAttribute("query2", e.getMessage());
 		}

@@ -4,7 +4,7 @@
 			
 			        <ul class="navbar-nav mr-auto">
 			            <li class="nav-item">
-			                <a class="nav-link waves-light" href="accueilClient" >Appel</a>
+			                <a class="nav-link waves-light" href="profil" >Appel</a>
 			            </li>
 			        </ul>
 	

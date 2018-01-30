@@ -113,17 +113,19 @@
 			function add(){
 				if(!seance){
 					$('#dispseance').click(function(){
-			  			$.ajax({
-			  				url : 'seances',
-			  				type : 'GET',
-			  				dataType: 'html',
-			  				data :  {module : $('#modules').val(), groupe : $('#groupe').val() },
-			  				success : function(seances,statut) {
-			  					$('#seances').append(seances);
-			  					seance = true;
-			  					$('#faire_appel').text("Afficher Liste");
-			  				}
-			  			}); 
+						if(!seance){
+				  			$.ajax({
+				  				url : 'seances',
+				  				type : 'GET',
+				  				dataType: 'html',
+				  				data :  {module : $('#modules').val(), groupe : $('#groupe').val() },
+				  				success : function(seances,statut) {
+				  					$('#seances').append(seances);
+				  					seance = true;
+				  					$('#faire_appel').text("Afficher Liste");
+				  				}
+				  			}); 							
+						}
 					});	
 				}
 				$('#groupe').change(function(){

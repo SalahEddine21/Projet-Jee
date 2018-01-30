@@ -23,15 +23,16 @@ public class StockNotes_Prof extends HttpServlet {
 
 		try {
 			
-			int id_min = Integer.valueOf(request.getParameter("id_min"));
-			int id_max = Integer.valueOf(request.getParameter("id_max"));
 			int id_mod = Integer.valueOf(request.getParameter("id_module"));
 			int id_eval = Operations_Eval.getIdEval(id_mod);
 			
-			for(int i=id_min ;i<=id_max; i++){
-				float note = Float.valueOf(request.getParameter(String.valueOf(i)));
-				Operations_Eval.insertNoteEtd(i, id_eval, note);
+			String[] ids = (String[]) session.getAttribute("ids");
+			
+			for(int i=0 ;i<ids.length; i++){
+				float note = Float.valueOf(request.getParameter(ids[i]));
+				Operations_Eval.insertNoteEtd(Integer.valueOf(ids[i]), id_eval, note);
 			}
+			session.removeAttribute("ids");
 		} catch (Exception e) {
 			response.sendRedirect(request.getContextPath()+"/Profs/erreur.jsp");		
 		}

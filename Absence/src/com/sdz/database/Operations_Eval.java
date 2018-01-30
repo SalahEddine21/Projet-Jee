@@ -13,7 +13,7 @@ public class Operations_Eval {
 	private static String SQL_INSERT_EVAL = " insert into evaluations (date_eval, heure_eval, id_mod) values (?,?,?) ";
 	private static String SQL_SELECT_ID_EVAL = "select id_eval from evaluations where id_mod = ?";
 	private static String SQL_INSERT_NOTE_EVAL = "insert into etd_eval values (?,?,?)";
-	private static String SQL_CHECK_EVAL_EXISTANCE = "select etd_eval.id_etd from evaluations, etd_eval where evaluations.id_eval = etd_eval.id_eval and evaluations.id_mod = ? and etd_eval.id_etd in (select id_etd from etudiants where id_groupe = ?) ";
+	private static String SQL_CHECK_EVAL_EXISTANCE = "select etd_eval.id_etd from evaluations, etd_eval, etudiants where evaluations.id_eval = etd_eval.id_eval and evaluations.id_mod = ? and etd_eval.id_etd = etudiants.id_etd and etudiants.id_groupe = ? ";
 	
 	public static void insertEval(Evaluation e) throws Exception{
 		Connection connection=null;
@@ -56,7 +56,8 @@ public class Operations_Eval {
 		preparedStatement = getPreparedStatement(SQL_CHECK_EVAL_EXISTANCE,connection,false,id_mod, id_groupe);	
 		result = preparedStatement.executeQuery();		
 		
-		return result.next() == true ? 1:0;		
+		if(result.next()) return 1;
+		return 0;
 	}
 	
 	//---------------------------------------------------------------------------------------------------------------------------//

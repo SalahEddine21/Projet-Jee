@@ -14,7 +14,7 @@ import com.sdz.Beans.Etudiant_Absence;
 public class Operations_Presences {
 
 	private static String SQL_INSERT_QUERY = "insert into absences (id_etd, id_seance, present, justifier) values (?,?,?,?) ";
-	private static String SQL_SELECT_STUDENTS_ABS = "select etudiants.id_etd as id, etudiants.num_etd as num, etudiants.nom_etd as nom, etudiants.prenom_etd as prenom, absences.present as present, absences.justifier as justifier from etudiants, absences where etudiants.id_etd = absences.id_etd and absences.id_seance = ?";
+	private static String SQL_SELECT_STUDENTS_ABS = "select etudiants.id_etd as id, etudiants.num_etd as num, etudiants.nom_etd as nom, etudiants.prenom_etd as prenom, absences.present as present, absences.justifier as justifier from etudiants, absences where etudiants.id_etd = absences.id_etd and absences.id_seance = ? ORDER BY etudiants.id_etd ASC";
 	private static String SQL_UPDATE_PRESENCE = "update absences set present = ? , justifier = ? where id_etd = ? and id_seance = ?";
 	private static String SQL_SELECT_SEANCE = "select * from absences where id_seance = ?";
 	

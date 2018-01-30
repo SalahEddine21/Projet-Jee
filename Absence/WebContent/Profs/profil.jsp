@@ -125,16 +125,18 @@
 			function add(){
 				if(!seance){
 					$('#dispseance').click(function(){
-			  			$.ajax({
-			  				url : 'seances',
-			  				type : 'GET',
-			  				dataType: 'html',
-			  				data :  {module : $('#modules').val(), groupe : $('#groupe').val() },
-			  				success : function(seances,statut) {
-			  					$('#seances').append(seances);
-			  					seance = true;
-			  				}
-			  			}); 
+						if(!seance){
+				  			$.ajax({
+				  				url : 'seances',
+				  				type : 'GET',
+				  				dataType: 'html',
+				  				data :  {module : $('#modules').val(), groupe : $('#groupe').val() },
+				  				success : function(seances,statut) {
+				  					$('#seances').append(seances);
+				  					seance = true;
+				  				}
+				  			}); 							
+						}
 					});	
 				}
 				$('#groupe').change(function(){

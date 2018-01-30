@@ -49,6 +49,7 @@ public class ChangementGrp_Etd extends HttpServlet {
 		try {
 			Operations_Changement.insertLine(id_etd, id_groupe_src);
 			Operations_Etudiant.UpdateGrp(id_etd, id_groupe_dest);
+			etd.setId_groupe(id_groupe_dest);
 		} catch (Exception e) {
 			request.setAttribute("query", e.getMessage());
 		}

@@ -223,4 +223,204 @@
 		<servlet-name>changement</servlet-name>
 		<url-pattern>/Etudiants/changement</url-pattern>
 	</servlet-mapping>
+	
+	<!-- ************************************ ADMIN *************************************** -->	
+
+	<!-- Connexion Admin -->
+	<servlet>
+		<servlet-name>ConnexionAdmin</servlet-name>
+		<servlet-class>com.sdz.servlets.ConnexionAdmin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ConnexionAdmin</servlet-name>
+		<url-pattern>/Admin/connexion</url-pattern>
+	</servlet-mapping>	
+	
+	<!-- Profil Admin -->
+	<servlet>
+		<servlet-name>ProfilAdmin</servlet-name>
+		<servlet-class>com.sdz.servlets.ProfilAdmin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ProfilAdmin</servlet-name>
+		<url-pattern>/Admin/profil</url-pattern>
+	</servlet-mapping>	
+	
+	<!-- DASHBOARD Admin -->
+	<servlet>
+		<servlet-name>dashboard</servlet-name>
+		<servlet-class>com.sdz.servlets.SeancesInfo_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>dashboard</servlet-name>
+		<url-pattern>/Admin/seancesAdmin</url-pattern>
+	</servlet-mapping>	
+	
+	<!-- Deconnexion Admin -->
+	<servlet>
+		<servlet-name>deconnexion</servlet-name>
+		<servlet-class>com.sdz.servlets.DeconnexionAdmin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>deconnexion</servlet-name>
+		<url-pattern>/Admin/deconnexion</url-pattern>
+	</servlet-mapping>	
+	
+	<!-- Detail Seance Admin -->
+	<servlet>
+		<servlet-name>detailSeance</servlet-name>
+		<servlet-class>com.sdz.servlets.DetailSeance_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>detailSeance</servlet-name>
+		<url-pattern>/Admin/DetailSeance</url-pattern>
+	</servlet-mapping>	
+	
+	<!-- Detail Etudiant  -->
+	<servlet>
+		<servlet-name>detailEtdAdmin</servlet-name>
+		<servlet-class>com.sdz.servlets.DetailEtd_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>detailEtdAdmin</servlet-name>
+		<url-pattern>/Admin/detailEtd</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Detail Groupe  -->
+	<servlet>
+		<servlet-name>detailGrpAdmin</servlet-name>
+		<servlet-class>com.sdz.servlets.DetailGrp_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>detailGrpAdmin</servlet-name>
+		<url-pattern>/Admin/detailGrp</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Ajout du prof  -->
+	<servlet>
+		<servlet-name>AjoutProf</servlet-name>
+		<servlet-class>com.sdz.servlets.AjouterProf_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>AjoutProf</servlet-name>
+		<url-pattern>/Admin/ajoutProf</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Ajouter Un module  -->
+	<servlet>
+		<servlet-name>AjoutModule</servlet-name>
+		<servlet-class>com.sdz.servlets.GestionModule_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>AjoutModule</servlet-name>
+		<url-pattern>/Admin/gestion_modules</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Supprimer Un module  -->
+	<servlet>
+		<servlet-name>SuppModule</servlet-name>
+		<servlet-class>com.sdz.servlets.SuppModule_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SuppModule</servlet-name>
+		<url-pattern>/Admin/suppMod</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Gestion des groupes  -->
+	<servlet>
+		<servlet-name>GestionGrp</servlet-name>
+		<servlet-class>com.sdz.servlets.Gestion_Groupes_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GestionGrp</servlet-name>
+		<url-pattern>/Admin/gestion_groupes</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Ajout d'un groupe -->
+	
+	<servlet>
+		<servlet-name>ajoutGrp</servlet-name>
+		<servlet-class>com.sdz.servlets.AjouterGrp_Admin</servlet-class>
+		<init-param>
+			<param-name>chemin</param-name>
+			<param-value>C:\Users\SalahEddine\Desktop\JEEProject\Absence\WebContent\fichier\</param-value>
+		</init-param>
+		<multipart-config>
+			<location>C:\Users\SalahEddine\file</location>
+			<max-file-size>10485760</max-file-size> <!-- 10 Mo -->
+			<max-request-size>52428800</max-request-size> <!-- 5 x 10 Mo -->
+			<file-size-threshold>1048576</file-size-threshold> <!-- 1 Mo -->
+		</multipart-config>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ajoutGrp</servlet-name>
+		<url-pattern>/Admin/ajoutGrp</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Supprimer Un groupe  -->
+	<servlet>
+		<servlet-name>SuppGrp</servlet-name>
+		<servlet-class>com.sdz.servlets.SuppGrp_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SuppGrp</servlet-name>
+		<url-pattern>/Admin/suppGrp</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Gestion des Séances  -->
+	<servlet>
+		<servlet-name>gestion_seances</servlet-name>
+		<servlet-class>com.sdz.servlets.GestionSeances_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>gestion_seances</servlet-name>
+		<url-pattern>/Admin/gestion_seances</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Supp Séances  -->
+	<servlet>
+		<servlet-name>suppSc</servlet-name>
+		<servlet-class>com.sdz.servlets.SuppSeance_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>suppSc</servlet-name>
+		<url-pattern>/Admin/suppSc</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Gestion des Séances  -->
+	<servlet>
+		<servlet-name>gestion_profs</servlet-name>
+		<servlet-class>com.sdz.servlets.GestionProfs_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>gestion_profs</servlet-name>
+		<url-pattern>/Admin/gestion_profs</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Detail Prof  -->
+	<servlet>
+		<servlet-name>DetailProf</servlet-name>
+		<servlet-class>com.sdz.servlets.DetailProf_Admin</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DetailProf</servlet-name>
+		<url-pattern>/Admin/DetailPrf</url-pattern>
+	</servlet-mapping>
 </web-app>
